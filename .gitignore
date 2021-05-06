@@ -1,0 +1,10 @@
+# Visual Studio Code
+.vscode
+
+# Intellij
+.idea
+*.iml
+
+# NodeJS
+node_modules/
+tmp/
