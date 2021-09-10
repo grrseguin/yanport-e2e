@@ -5,22 +5,36 @@
 //   from 'protractor/globals';
 //
 // The jasmine typings are brought in via DefinitelyTyped ambient typings.
-import {browser, element, by, By, $, $$, ExpectedConditions} from 'protractor';
+import { browser, by, element } from 'protractor';
 
 describe('protractor with typescript typings', () => {
+    // TODO move the line below to a config file
+    const BASE_URL = 'https://app.yanport.com';
+    const USERNAME = 'e2e-user';
+    const PASSWORD = 'e2ePassword';
+
     beforeEach(() => {
-        browser.get('http://www.angularjs.org');
+        browser.get(BASE_URL);
     });
 
-    it('should greet the named user', () => {
-        element(by.model('yourName')).sendKeys('Julie');
-        let greeting = element(by.binding('yourName'));
-        expect(greeting.getText()).toEqual(Promise.resolve('Hello Julie!'));
+    it('should logged successfully', async () => {
+        // Given
+        element(by.css("input[formControlName=username]")).sendKeys(USERNAME);
+        element(by.css("input[formControlName=password]")).sendKeys(PASSWORD);
+
+        // When
+        element(by.css('form')).submit();
+
+        // Then
+        const usernameElement = element(by.className('username'));
+        expect(await usernameElement.getText()).toBe('2end End');
     });
 
-    it('should list todos', function() {
-        let todoList = element.all(by.repeater('todo in todoList.todos'));
-        expect(todoList.count()).toEqual(Promise.resolve(2));
-        expect(todoList.get(1).getText()).toEqual(Promise.resolve('build an AngularJS app'));
+    it('should go to search module', async () => {
+        // Given
+        // When
+        // Then
+        const usernameElement = element(by.className('username'));
+        expect(await usernameElement.getText()).toBe('must failed');
     });
 });
